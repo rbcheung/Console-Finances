@@ -106,59 +106,43 @@ for (var i = 0; i < finances.length; i++) {
 
 console.log("Total: $" + sum);
 
+//The average of the changes in Profit/Losses over the entire period.
 
-// The average of the changes in Profit/Losses over the entire period.
+var numbersOnly = [];
+for (var i = 0; i < finances.length - 1; i++) {
+    var profitLoss = [finances[i + 1][0], finances[i + 1][1] - finances[i][1]];
 
-var financesArray = finances.map((dollars)=>dollars[1])
-console.log(financesArray)
-
-
-
-var maxProfit = {
-    monthName: "",
-    profit: 0,
-
-
+    numbersOnly.push(profitLoss);
 }
-var minProfit = {
-    monthName: "",
-    profit: 0,
+
+var sumOfNumbersOnly = 0;
+
+for (var i = 0; i < numbersOnly.length; i++) {
+    sumOfNumbersOnly += numbersOnly[i][1];
 }
-finances.forEach((month)=>{
-    if (month[1]>maxProfit.profit) {
-        maxProfit.monthName= month[0]
-        maxProfit.profit= month[1]
+console.log('Average Change: $' + (sumOfNumbersOnly / numbersOnly.length).toFixed(2));
+
+// The greatest increase in profits (date and amount) over the entire period.
+
+var greatestIncrease = [];
+var greatestDecrease = [];
+
+for (var i = 0; i < numbersOnly.length; i++) {
+    if (i === 0) {
+        greatestIncrease[1] = numbersOnly[i][1]
+        greatestDecrease[1] = numbersOnly[i][1]
+
+    } else {
+
+        if (numbersOnly[i][1] > greatestIncrease[1]) {
+
+            greatestIncrease = [numbersOnly[i][0], numbersOnly[i][1]];
+        }
+
+        if (numbersOnly[i][1] < greatestDecrease[1]) {
+            greatestDecrease = [numbersOnly[i][0], numbersOnly[i][1]];
+        }
     }
-    if (month[1]<minProfit.profit) {
-        minProfit.monthName= month[0]
-        minProfit.profit= month[1]
-    }
-    return {maxProfit,minProfit}
-
-})
-
-// for (k = 0; k < finances.length; k++) {
-//     //var currentMonth = (finances[k][1]);
-//     //console.log(currentMonth);
-//     if (finances[k][1]>maxProfit.profit) {
-//         maxProfit.monthName= finances [k][0]
-//         maxProfit.profit= finances [k][1]
-//     }
-//     if (finances[k][1]<minProfit.profit) {
-//         minProfit.monthName= finances [k][0]
-//         minProfit.profit= finances [k][1]
-//     }
-//     return {maxProfit,minProfit}
-
-
-// }
-console.log("Greatest increase", maxProfit)
-console.log("greatest decrease", minProfit)
-
-
-
-    // The greatest increase in profits (date and amount) over the entire period.
-
-    // The greatest decrease in losses (date and amount) over the entire period.
-
-
+}
+console.log('Greatest Increase in Profits: ' + greatestIncrease[0] + " $" + greatestIncrease[1]);
+console.log('Greatest Decrease in Profits: ' + greatestDecrease[0] + " $" + greatestDecrease[1]);
