@@ -87,14 +87,19 @@ var finances = [
     ['Feb-2017', 671099]
 ];
 
+/*****************************************************************************************************************************/
 // Title 
 
 console.log('Financial Analysis')
 console.log('-------------------------')
 
+/*****************************************************************************************************************************/
+
 // The total number of months included in the dataset.
 
 console.log("Total months = " + finances.length);
+
+/*****************************************************************************************************************************/
 
 // The net total amount of Profit/Losses over the entire period.
 
@@ -106,41 +111,45 @@ for (var i = 0; i < finances.length; i++) {
 
 console.log("Total: $" + sum);
 
+/*****************************************************************************************************************************/
+
 //The average of the changes in Profit/Losses over the entire period.
 
-var numbersOnly = [];
+var justNumbers = [];
 for (var i = 0; i < finances.length - 1; i++) {
     var profitLoss = [finances[i + 1][0], finances[i + 1][1] - finances[i][1]];
 
-    numbersOnly.push(profitLoss);
+    justNumbers.push(profitLoss);
 }
 
-var sumOfNumbersOnly = 0;
+var sumOfNumbers = 0;
 
-for (var i = 0; i < numbersOnly.length; i++) {
-    sumOfNumbersOnly += numbersOnly[i][1];
+for (var i = 0; i < justNumbers.length; i++) {
+    sumOfNumbers += justNumbers[i][1];
 }
-console.log('Average Change: $' + (sumOfNumbersOnly / numbersOnly.length).toFixed(2));
+console.log('Average Change: $' + (sumOfNumbers / justNumbers.length).toFixed(2));
+
+/*****************************************************************************************************************************/
 
 // The greatest increase in profits (date and amount) over the entire period.
 
 var greatestIncrease = [];
 var greatestDecrease = [];
 
-for (var i = 0; i < numbersOnly.length; i++) {
+for (var i = 0; i < justNumbers.length; i++) {
     if (i === 0) {
-        greatestIncrease[1] = numbersOnly[i][1]
-        greatestDecrease[1] = numbersOnly[i][1]
+        greatestIncrease[1] = justNumbers[i][1]
+        greatestDecrease[1] = justNumbers[i][1]
 
     } else {
 
-        if (numbersOnly[i][1] > greatestIncrease[1]) {
+        if (justNumbers[i][1] > greatestIncrease[1]) {
 
-            greatestIncrease = [numbersOnly[i][0], numbersOnly[i][1]];
+            greatestIncrease = [justNumbers[i][0], justNumbers[i][1]];
         }
 
-        if (numbersOnly[i][1] < greatestDecrease[1]) {
-            greatestDecrease = [numbersOnly[i][0], numbersOnly[i][1]];
+        if (justNumbers[i][1] < greatestDecrease[1]) {
+            greatestDecrease = [justNumbers[i][0], justNumbers[i][1]];
         }
     }
 }
