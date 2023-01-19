@@ -97,7 +97,7 @@ console.log('-------------------------')
 
 // The total number of months included in the dataset.
 
-console.log("Total months = " + finances.length);
+console.log("Total Months = " + finances.length);
 
 /*****************************************************************************************************************************/
 
